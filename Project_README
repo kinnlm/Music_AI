@@ -46,3 +46,29 @@ For testing or debugging, modify the notebook to process only a subset of files:
 ```python
 df = df.sample(n=5)
 ```
+---
+
+## ⚙️ Tips for Lower-End Machines
+
+If you're working with limited compute or storage:
+
+- **Increase `hop_length`** during spectrogram extraction to reduce output resolution and file size.
+  - Example: `hop_length = 2048` instead of 512
+  - This reduces compute time and output volume at the cost of fidelity.
+- Process only a small number of files for debugging and experimentation.
+
+These adjustments can make the project more accessible without changing the core logic.
+
+---
+
+## ❗ Notes
+
+- The MAESTRO dataset license and description are provided in a separate `README` file.
+- This project is GPU-accelerated but will run on CPU (albeit slowly).
+- All preprocessing and tokenization steps are deterministic and reproducible.
+
+---
+
+## 📬 Contact
+
+For questions, reach out to the project author or refer to inline notebook documentation.
