@@ -1,0 +1,74 @@
+# Music AI: WAV-to-MIDI Transcription System
+
+**Project\_README.md**
+
+This project is a deep learning-based system that converts raw WAV audio into symbolic MIDI note events using a CNN + Transformer architecture. It is designed for expressive polyphonic music transcription and is built with reproducibility and modularity in mind.
+
+---
+
+## 🔧 Project Structure
+
+* `Data_Preprocessing_Fixed.ipynb` — Regenerates spectrograms and MIDI token sequences.
+* `.venv_new/` — Local virtual environment with all required Python packages.
+* `maestro-v3.0.0/` — MAESTRO dataset (WAV + MIDI pairs) used for supervised training.
+* `train_split.pkl`, `music_df_fixed.pkl`, etc. — Precomputed metadata for easier reloading.
+* **Excluded folders**:
+
+  * `spectrogram_cache/` and `cnn_outputs/` (\~3.2 TB combined) are **not included** due to storage constraints.
+
+---
+
+## 🚀 How to Run
+
+1. **Open the project in PyCharm** (or any Python IDE).
+2. The local `.venv_new` environment should be detected automatically.
+
+   * If not, set it as the interpreter manually.
+3. Open `Data_Preprocessing_Fixed.ipynb` and **Run All Cells**.
+
+This will:
+
+* Extract 11-channel spectrograms from WAV files.
+* Quantize and tokenize the MIDI files.
+* Save spectrograms and token data to disk.
+
+---
+
+## ⏳ Estimated Runtime
+
+* **Full preprocessing** (WAV → spectrograms + MIDI tokenization) takes approximately:
+
+  * ⏱️ **20 hours on a high-end machine** (RTX 4070 Ti SUPER, 128 GB RAM).
+  * Time may vary depending on hardware specs and whether disk caching is used.
+
+For testing or debugging, modify the notebook to process only a subset of files:
+
+```python
+df = df.sample(n=5)
+```
+---
+
+## ⚙️ Tips for Lower-End Machines
+
+If you're working with limited compute or storage:
+
+- **Increase `hop_length`** during spectrogram extraction to reduce output resolution and file size.
+  - Example: `hop_length = 2048` instead of 512
+  - This reduces compute time and output volume at the cost of fidelity.
+- Process only a small number of files for debugging and experimentation.
+
+These adjustments can make the project more accessible without changing the core logic.
+
+---
+
+## ❗ Notes
+
+- The MAESTRO dataset license and description are provided in a separate `README` file.
+- This project is GPU-accelerated but will run on CPU (albeit slowly).
+- All preprocessing and tokenization steps are deterministic and reproducible.
+
+---
+
+## 📬 Contact
+
+For questions, reach out to the project author or refer to inline notebook documentation.
